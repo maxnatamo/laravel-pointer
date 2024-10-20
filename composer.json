@@ -1,0 +1,84 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "maxnatamo/laravel-pointer",
+    "description": "Laravel plugin for making flows for users.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "users",
+        "interactive",
+        "flow",
+        "cms",
+        "laravel"
+    ],
+    "authors": [
+        {
+            "name": "Max T. Kristiansen",
+            "email": "me@maxtrier.dk",
+            "homepage": "https://maxtrier.dk",
+            "role": "Author"
+        }
+    ],
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "test:feature": "vendor/bin/pest --testsuite=Feature",
+        "test:unit": "vendor/bin/pest --testsuite=Unit",
+        "analyze": "vendor/bin/phpstan analyse src tests",
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve --ansi"
+        ],
+        "lint": [
+            "@php vendor/bin/phpstan analyse --verbose --ansi"
+        ]
+    },
+    "require": {
+        "php": "^8.2",
+        "illuminate/support": "^11.0",
+        "illuminate/database": "^11.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "mockery/mockery": "^1.6",
+        "pestphp/pest": "^3.2",
+        "pestphp/pest-plugin-type-coverage": "^3.1",
+        "orchestra/testbench": "^9.5",
+        "phpstan/phpstan": "^1.12"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pointer\\Providers\\TourServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Pointer\\": "./src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

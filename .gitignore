@@ -1,0 +1,11 @@
+/.phpunit.cache
+/bootstrap/ssr
+/vendor
+.phpactor.json
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+/.fleet
+/.idea
+/.zed
